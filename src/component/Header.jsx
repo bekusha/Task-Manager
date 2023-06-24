@@ -4,8 +4,10 @@ import iconUp from "../assets/icon-chevron-up.svg";
 import iconDown from "../assets/icon-chevron-down.svg";
 import elipsis from "../assets/icon-vertical-ellipsis.svg";
 import HeaderDropdown from "./HeaderDropdown";
-const Header = () => {
+import AddEditBoardModal from "../modals/AddEditBoardModal";
+const Header = ({ boardModalOpen, setBoardModalOpen }) => {
   const [openDropdown, setOpenDropdown] = useState(false);
+  const [boadType, setBoadType] = useState("add");
   return (
     <div className="p-4 fixed left-0 bg-white dark:bg-[#2b2d37] z-50 right-0">
       <header className="flex justify-between dark:text-white items-center">
@@ -39,7 +41,15 @@ const Header = () => {
         </div>
       </header>
 
-      {openDropdown && <HeaderDropdown setOpenDropdown={setOpenDropdown} />}
+      {openDropdown && (
+        <HeaderDropdown
+          setBoardModalOpen={setBoardModalOpen}
+          setOpenDropdown={setOpenDropdown}
+        />
+      )}
+      {boardModalOpen && (
+        <AddEditBoardModal type="add" setBoardModalOpen={setBoardModalOpen} />
+      )}
     </div>
   );
 };
