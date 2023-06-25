@@ -31,12 +31,13 @@ function AddEditBoardModal({ setBoardModalOpen, type }) {
     if (!name.trim()) {
       return false;
     }
-    for (let i = 0; i < name.length; i++) {
+    for (let i = 0; i < newColumns.length; i++) {
       if (!newColumns[i].name.trim()) {
         return false;
       }
     }
     setIsValid(true);
+    return true;
   };
 
   const onSubmit = (type) => {
