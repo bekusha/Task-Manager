@@ -71,6 +71,7 @@ const Header = ({ boardModalOpen, setBoardModalOpen }) => {
         <AddEditTaskModal
           setOpenAddEditTask={setOpenAddEditTask}
           device="mobile"
+          type={"add"}
         />
       )}
     </div>
