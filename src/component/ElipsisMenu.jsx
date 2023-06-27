@@ -19,7 +19,14 @@ const ElipsisMenu = ({ type, setOpenEditModal, setOpenDeleteModal }) => {
           >
             Edit {type}
           </p>
-          <p className="cursor-pointer text-red-500">Delete {type}</p>
+          <p
+            onClick={() => {
+              setOpenDeleteModal();
+            }}
+            className="cursor-pointer text-red-500"
+          >
+            Delete {type}
+          </p>
         </div>
       </div>
     </div>

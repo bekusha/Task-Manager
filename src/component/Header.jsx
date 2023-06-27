@@ -8,6 +8,8 @@ import AddEditBoardModal from "../modals/AddEditBoardModal";
 import ElipsisMenu from "./ElipsisMenu";
 import { useDispatch, useSelector } from "react-redux";
 import AddEditTaskModal from "../modals/AddEditTaskModal";
+import DeleteModal from "../modals/DeleteModal";
+import boardsSlice from "../redux/bordersSlice";
 const Header = ({ boardModalOpen, setBoardModalOpen }) => {
   const dispatch = useDispatch();
 
@@ -25,6 +27,17 @@ const Header = ({ boardModalOpen, setBoardModalOpen }) => {
   const setOpenDeleteModal = () => {
     setIsDeleteModalOpen(true);
     setIsElipsisOpen(false);
+  };
+  const onDeleteBtnClick = () => {
+    dispatch(boardsSlice.actions.deleteBoard());
+    dispatch(boardsSlice.actions.setBoardActive({ index: 0 }));
+    setIsDeleteModalOpen(false);
+  };
+
+  const onDropownClick = () => {
+    setOpenDropdown((state) => !state);
+    setIsElipsisOpen(false);
+    setBoadType("add");
   };
   return (
     <div className="p-4 fixed left-0 bg-white dark:bg-[#2b2d37] z-50 right-0">
@@ -45,7 +58,7 @@ const Header = ({ boardModalOpen, setBoardModalOpen }) => {
               src={openDropdown ? iconUp : iconDown}
               alt="dropdown icon"
               onClick={() => {
-                setOpenDropdown((state) => !state);
+                onDropownClick();
               }}
             />
           </div>
@@ -99,6 +112,14 @@ const Header = ({ boardModalOpen, setBoardModalOpen }) => {
           setOpenAddEditTask={setOpenAddEditTask}
           device="mobile"
           type={"add"}
+        />
+      )}
+      {isDeleteModalOpen && (
+        <DeleteModal
+          type={"board"}
+          title={board.name}
+          setIsDeleteModalOpen={setIsDeleteModalOpen}
+          onDeleteBtnClick={onDeleteBtnClick}
         />
       )}
     </div>
