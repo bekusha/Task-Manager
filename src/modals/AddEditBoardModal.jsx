@@ -4,7 +4,7 @@ import crossIcon from "../assets/icon-cross.svg";
 import { useDispatch, useSelector } from "react-redux";
 import boardSlices from "../redux/bordersSlice";
 
-function AddEditBoardModal({ setBoardModalOpen, type }) {
+function AddEditBoardModal({ setIsBoardModalOpen, type }) {
   const [name, setName] = useState("");
   const [isValid, setIsValid] = useState(true);
   const [isFirstLoad, setIsFirstLoad] = useState(false);
@@ -55,7 +55,7 @@ function AddEditBoardModal({ setBoardModalOpen, type }) {
   };
 
   const onSubmit = (type) => {
-    setBoardModalOpen(false);
+    setIsBoardModalOpen(false);
     if (type === "add") {
       dispatch(boardSlices.actions.addBoard({ name, newColumns }));
     } else {
