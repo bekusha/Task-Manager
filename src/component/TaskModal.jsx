@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import elipsis from "../assets/icon-vertical-ellipsis.svg";
 import ElipsisMenu from "./ElipsisMenu";
+import Subtask from "./Subtask";
 const TaskModal = ({ colIndex, taskIndex, setIsTaskModalOpen }) => {
   const dispatch = useDispatch();
   const boards = useSelector((state) => state.boards);
@@ -47,6 +48,25 @@ const TaskModal = ({ colIndex, taskIndex, setIsTaskModalOpen }) => {
               type="Task"
             />
           )}
+        </div>
+        <p className="text-gray-500 font-semibold tracking-wide text-sm pt-6 ">
+          {task.description}
+        </p>
+        <p className="pt-6 text-gray-500 tracking-widest text-sm ">
+          Subtasks ({completed} of {subtasks.length})
+        </p>
+        {/* Subtasks Section */}
+        <div className="mt-3 space-y-2 ">
+          {subtasks.map((subtask, i) => {
+            return (
+              <Subtask
+                index={i}
+                taskIndex={taskIndex}
+                colIndex={colIndex}
+                key={i}
+              />
+            );
+          })}
         </div>
       </div>
     </div>
