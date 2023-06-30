@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { shuffle } from "lodash";
 import { useDispatch, useSelector } from "react-redux";
 import Task from "./Task";
+import boardsSlice from "../redux/bordersSlice";
 
 function Column({ colIndex }) {
   const colors = [
@@ -21,6 +22,7 @@ function Column({ colIndex }) {
   const boards = useSelector((state) => state.boards);
   const board = boards.find((board) => board.isActive === true);
   const col = board.columns.find((col, i) => i === colIndex);
+
   useEffect(() => {
     setColor(shuffle(colors).pop());
   }, [dispatch]);

@@ -5,17 +5,17 @@ import { useDispatch, useSelector } from "react-redux";
 import boardSlices from "../redux/bordersSlice";
 
 function AddEditBoardModal({ type, setBoardModalOpen }) {
-  const [name, setName] = useState("");
-  const [isValid, setIsValid] = useState(true);
-  const [isFirstLoad, setIsFirstLoad] = useState(false);
   const dispatch = useDispatch();
+  const [isFirstLoad, setIsFirstLoad] = useState(true);
+  const [name, setName] = useState("");
+  const [newColumns, setNewColumns] = useState([
+    { name: "Todo", tasks: [], id: uuidv4() },
+    { name: "Doing", tasks: [], id: uuidv4() },
+  ]);
+  const [isValid, setIsValid] = useState(true);
   const board = useSelector((state) => state.boards).find(
     (board) => board.isActive
   );
-  const [newColumns, setNewColumns] = useState([
-    { name: "Todo", task: [], id: uuidv4() },
-    { name: "Doing", task: [], id: uuidv4() },
-  ]);
 
   if (type === "edit" && isFirstLoad) {
     setNewColumns(
@@ -26,19 +26,6 @@ function AddEditBoardModal({ type, setBoardModalOpen }) {
     setName(board.name);
     setIsFirstLoad(false);
   }
-
-  const onChange = (id, newValue) => {
-    setNewColumns((prevState) => {
-      const newState = [...prevState];
-      const column = newState.find((col) => col.id === id);
-      column.name = newValue;
-      return newState;
-    });
-  };
-
-  const onDelete = (id) => {
-    setNewColumns((prevState) => prevState.filter((el) => el.id !== id));
-  };
 
   const validate = () => {
     setIsValid(false);
@@ -52,6 +39,19 @@ function AddEditBoardModal({ type, setBoardModalOpen }) {
     }
     setIsValid(true);
     return true;
+  };
+
+  const onChange = (id, newValue) => {
+    setNewColumns((prevState) => {
+      const newState = [...prevState];
+      const column = newState.find((col) => col.id === id);
+      column.name = newValue;
+      return newState;
+    });
+  };
+
+  const onDelete = (id) => {
+    setNewColumns((prevState) => prevState.filter((el) => el.id !== id));
   };
 
   const onSubmit = (type) => {
@@ -98,7 +98,7 @@ function AddEditBoardModal({ type, setBoardModalOpen }) {
           <label className="text-sm dark:text-white text-gray-500">
             Board Columns
           </label>
-
+          {console.log(newColumns)}
           {newColumns.map((column, index) => (
             <div key={index} className="flex items-center w-full">
               <input
