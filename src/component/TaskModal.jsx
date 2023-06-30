@@ -62,7 +62,7 @@ const TaskModal = ({ colIndex, taskIndex, setIsTaskModalOpen }) => {
   };
   const onDeleteBtnClick = () => {
     dispatch(boardsSlice.actions.deleteTask({ taskIndex, colIndex }));
-    // dispatch(boardsSlice.actions.setBoardActive({index : 0}))
+    dispatch(boardsSlice.actions.setBoardActive({ index: 0 }));
     setIsTaskModalOpen(false);
     setIsDeleteModalOpen(false);
   };

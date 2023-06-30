@@ -55,6 +55,7 @@ const boardsSlice = createSlice({
       const board = state.find((board) => board.isActive);
       const column = board.columns.find((col, index) => index === prevColIndex);
       const task = column.tasks.find((task, index) => index === taskIndex);
+
       task.title = title;
       task.status = status;
       task.description = description;
