@@ -4,7 +4,7 @@ import crossIcon from "../assets/icon-cross.svg";
 import { useDispatch, useSelector } from "react-redux";
 import boardSlices from "../redux/bordersSlice";
 
-function AddEditBoardModal({ setIsBoardModalOpen, type }) {
+function AddEditBoardModal({ type, setBoardModalOpen }) {
   const [name, setName] = useState("");
   const [isValid, setIsValid] = useState(true);
   const [isFirstLoad, setIsFirstLoad] = useState(false);
@@ -28,8 +28,8 @@ function AddEditBoardModal({ setIsBoardModalOpen, type }) {
   }
 
   const onChange = (id, newValue) => {
-    setNewColumns((pervState) => {
-      const newState = [...pervState];
+    setNewColumns((prevState) => {
+      const newState = [...prevState];
       const column = newState.find((col) => col.id === id);
       column.name = newValue;
       return newState;
@@ -37,7 +37,7 @@ function AddEditBoardModal({ setIsBoardModalOpen, type }) {
   };
 
   const onDelete = (id) => {
-    setNewColumns((perState) => perState.filter((el) => el.id !== id));
+    setNewColumns((prevState) => prevState.filter((el) => el.id !== id));
   };
 
   const validate = () => {
@@ -55,7 +55,7 @@ function AddEditBoardModal({ setIsBoardModalOpen, type }) {
   };
 
   const onSubmit = (type) => {
-    setIsBoardModalOpen(false);
+    setBoardModalOpen(false);
     if (type === "add") {
       dispatch(boardSlices.actions.addBoard({ name, newColumns }));
     } else {
@@ -89,9 +89,7 @@ function AddEditBoardModal({ setIsBoardModalOpen, type }) {
             className="bg-transparent px-4 py-2 rounded-md text-sm border border-gray-600 outline-none focus:outline-[#635fc7] outline-1 ring-0"
             placeholder="e.g Web Design"
             value={name}
-            onChange={(e) => {
-              setName(e.target.value);
-            }}
+            onChange={(e) => setName(e.target.value)}
             id="board-name-input"
           />
         </div>
@@ -102,14 +100,11 @@ function AddEditBoardModal({ setIsBoardModalOpen, type }) {
           </label>
 
           {newColumns.map((column, index) => (
-            <div
-              key={index}
-              className="flex items-center w-full"
-              onChange={(e) => {
-                onChange(column.id, e.target.value);
-              }}
-            >
+            <div key={index} className="flex items-center w-full">
               <input
+                onChange={(e) => {
+                  onChange(column.id, e.target.value);
+                }}
                 className="bg-transparent flex-grow px-4 py-2 rounded-md text-sm border border-gray-600 outline-none focus:outline-[#735fc7] "
                 value={column.name}
                 type="text"
@@ -141,6 +136,7 @@ function AddEditBoardModal({ setIsBoardModalOpen, type }) {
             onClick={() => {
               const isValid = validate();
               if (isValid === true) onSubmit(type);
+              setBoardModalOpen(false);
             }}
           >
             {type === "add" ? "Create New Board" : "Save Changes"}
