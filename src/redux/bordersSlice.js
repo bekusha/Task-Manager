@@ -52,18 +52,30 @@ const boardsSlice = createSlice({
         newColIndex,
         taskIndex,
       } = action.payload;
-      const board = state.find((board) => board.isActive);
-      const column = board.columns.find((col, index) => index === prevColIndex);
-      const task = column.tasks.find((task, index) => index === taskIndex);
 
-      task.title = title;
-      task.status = status;
-      task.description = description;
-      task.subtasks = subtasks;
-      if (prevColIndex === newColIndex) return;
-      column.tasks = column.tasks.filter((task, index) => index !== taskIndex);
-      const newCol = board.columns.find((col, index) => index === newColIndex);
-      newCol.tasks.push(task);
+      const board = state.find((board) => board.isActive);
+      const prevCol = board.columns.find((col, i) => i === prevColIndex);
+
+      // Check if the previous column exists
+      if (prevCol) {
+        const task = prevCol.tasks.find((task, index) => index === taskIndex);
+
+        task.title = title;
+        task.status = status;
+        task.description = description;
+        task.subtasks = subtasks;
+
+        if (prevColIndex === newColIndex) return;
+
+        prevCol.tasks = prevCol.tasks.filter(
+          (task, index) => index !== taskIndex
+        );
+
+        const newCol = board.columns.find(
+          (col, index) => index === newColIndex
+        );
+        newCol.tasks.push(task);
+      }
     },
     dragTask: (state, action) => {
       const { colIndex, prevColIndex, taskIndex } = action.payload;

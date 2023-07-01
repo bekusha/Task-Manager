@@ -11,7 +11,7 @@ const AddEditTaskModal = ({
   setOpenAddEditTask,
   taskIndex,
   pervColIndex = 0,
-  setBoardModalOpen,
+  setIsTaskModalOpen,
 }) => {
   const dispatch = useDispatch();
   const [title, setTitle] = useState("");
@@ -197,8 +197,10 @@ const AddEditTaskModal = ({
               const isValid = validate();
               if (isValid) {
                 onSubmit(type);
+                console.log(type);
                 setOpenAddEditTask(false);
               }
+
               //   setOpenAddEditTask(false);
             }}
             className="w-full items-center text-white bg-[#365fc7] py-2 rounded-full"

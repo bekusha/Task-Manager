@@ -98,7 +98,7 @@ function AddEditBoardModal({ type, setBoardModalOpen }) {
           <label className="text-sm dark:text-white text-gray-500">
             Board Columns
           </label>
-          {console.log(newColumns)}
+
           {newColumns.map((column, index) => (
             <div key={index} className="flex items-center w-full">
               <input
