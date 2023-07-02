@@ -15,7 +15,7 @@ const ElipsisMenu = ({ type, setOpenEditModal, setOpenDeleteModal }) => {
             onClick={() => {
               setOpenEditModal();
             }}
-            className="cursos-pointer dark:text-gray-400 text-gray-700"
+            className="cursor-pointer dark:text-gray-400 text-gray-700"
           >
             Edit {type}
           </p>

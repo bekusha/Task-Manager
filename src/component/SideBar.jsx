@@ -68,7 +68,7 @@ const SideBar = ({ setIsSideBarOpen, isSideBarOpen }) => {
                     <p className="text-lg font-bold">Create New Board</p>
                   </div>
                 </div>
-                <div className="mx-2 p-4 relative space-x-2 bg-slate-100 dark:bg-[#20212c] flex justify-center items-center rounded-lg ">
+                <div className="mx-2  p-4 relative space-x-2 bg-slate-100 dark:bg-[#20212c] mb-150 flex justify-center items-center rounded-lg">
                   <img src={lightIcon} />
                   <Switch
                     checked={darkSide}
@@ -94,7 +94,7 @@ const SideBar = ({ setIsSideBarOpen, isSideBarOpen }) => {
               onClick={() => {
                 setIsSideBarOpen((state) => !state);
               }}
-              className=" flex items-center mt-2 absolute bottom-16 text-lg font-bold rounded-r-full hover:text-[#635fc7] cursor-pointer mr-6 mb-8 px-8 py-4 hover:bg-[#635fc71a] dark:hover:bg-white space-x-2 justify-center my-4 text-gray-500  "
+              className=" flex  items-center mt-2  absolute bottom-16  text-lg font-bold  rounded-r-full hover:text-[#635FC7] cursor-pointer mr-6 mb-0 px-8 py-4 hover:bg-[#635fc71a] dark:hover:bg-white  space-x-2 justify-center  my-4 text-gray-500 "
             >
               <img src={hideSidebarIcon} alt="sidebaricon" />
               {isSideBarOpen && <p>Hide Sidebar</p>}
